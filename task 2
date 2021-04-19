@@ -48,10 +48,14 @@ for i in range(0,d_test):
 
 
 
-model = linear_model.Ridge(alpha = 0.1)
+model = linear_model.Ridge(alpha = 1000)
+scores = cross_val_score(model, X, y, cv=10)
 regression = model.fit(X,y)
 Y_pred = regression.predict(X_test)
 print(Y_pred)
+
+
+print(scores)
 
 def featureTrans(arrx):
     x1 = arrx[0]
@@ -66,7 +70,10 @@ def featureTrans(arrx):
 transX = [featureTrans(i) for i in X]
 transX_test = [featureTrans(i) for i in X_test]
 linreg = linear_model.LinearRegression(fit_intercept = True)
+scores = cross_val_score(linreg, transX, y, cv=10)
 linreg.fit(transX,y)
 Y_pred2 = linreg.predict(transX_test)
 print(Y_pred2)
 
+
+print(scores)
